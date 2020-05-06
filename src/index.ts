@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { isTest } from "./config";
-import ibkr, { IBKREVENTS, IbkrEvents } from '@stoqey/ibkr';
-import { Broker, BrokerMethods } from "@stoqey/aurum-broker-spec";
+import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates } from '@stoqey/ibkr';
+import { Broker, BrokerMethods, BrokerAccountSummary } from "@stoqey/aurum-broker-spec";
 
 export class IbkrBroker extends Broker implements BrokerMethods {
     // events = {} as any;
@@ -65,7 +65,19 @@ export class IbkrBroker extends Broker implements BrokerMethods {
 
         });
     }
-    getAccountSummary: () => Promise<any>;
+
+    public async getAccountSummary(): Promise<BrokerAccountSummary> {
+        const portfolioInstance = Portfolios.Instance;
+
+        const accountId = AccountSummary.Instance.accountSummary.AccountId;
+        const totalCashValue = AccountSummary.Instance.accountSummary.TotalCashValue;
+        const portfolio = await portfolioInstance.getPortfolios();
+
+        return {
+            totalCashValue, accountId, portfolio
+        }
+    };
+
     getAllOrders: () => Promise<any>;
     getOpenOrders: () => Promise<any>;
 
