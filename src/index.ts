@@ -67,22 +67,22 @@ export class IbkrBroker extends Broker implements BrokerMethods {
     }
 
     public async getAccountSummary(): Promise<BrokerAccountSummary> {
-        const portfolioInstance = Portfolios.Instance;
 
         const accountId = AccountSummary.Instance.accountSummary.AccountId;
         const totalCashValue = AccountSummary.Instance.accountSummary.TotalCashValue;
-        const portfolio = await portfolioInstance.getPortfolios();
 
         return {
-            totalCashValue, accountId, portfolio
+            totalCashValue, accountId
         }
     };
 
     getAllOrders: () => Promise<any>;
     getOpenOrders: () => Promise<any>;
 
-    public async getAllPositions(): Promise<any> {
-        return {}
+    public async getAllPositions(): Promise<any[]> {
+        const portfolioInstance = Portfolios.Instance;
+        const portfolios = await portfolioInstance.getPortfolios();
+        return portfolios;
     }
 
     public async enterPosition(portfolio: any[]): Promise<any> {
