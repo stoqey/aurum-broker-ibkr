@@ -22,4 +22,17 @@ describe('IBKR broker', () => {
         ibkrBroker.getPriceUpdate("AAPL");
     })
 
+    it(`MarketData`, (done) => {
+
+        const startDate = new Date("2020-03-10 09:30:00");
+        const endDate = new Date("2020-03-13 09:30:00");
+
+        ibkrBroker.when("onMarketData", async ({ marketData }) => {
+            console.log('got market data', marketData && marketData.length);
+            done();
+        });
+
+        ibkrBroker.getMarketData({ symbol: "AAPL", startDate, endDate });
+    })
+
 })

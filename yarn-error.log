@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin/node /Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin/yarn add @stoqey/aurum-broker-mille
+  /Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin/node /Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin/yarn add @stokey/ibkr
 
 PATH: 
-  /Users/ceddymuhoza/google-cloud-sdk/bin:/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Users/ceddymuhoza/google-cloud-sdk/bin:/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin
+  /Users/ceddymuhoza/google-cloud-sdk/bin:/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ceddymuhoza/google-cloud-sdk/bin:/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin
 
 Yarn version: 
   1.22.4
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@stoqey%2faurum-broker-mille: Not found
+  Error: https://registry.yarnpkg.com/@stokey%2fibkr: Not found
       at Request.params.callback [as _callback] (/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/lib/node_modules/yarn/lib/cli.js:66987:18)
       at Request.self.callback (/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/lib/node_modules/yarn/lib/cli.js:140748:22)
       at Request.emit (events.js:311:20)
@@ -28,7 +28,7 @@ Trace:
 
 npm manifest: 
   {
-    "name": "@stoqey/aurum-broker-mille",
+    "name": "@stoqey/aurum-broker-ibkr",
     "version": "0.0.1",
     "private": false,
     "main": "build/index.js",
@@ -38,7 +38,8 @@ npm manifest:
       "start": "node build/index.js",
       "build": "rm -rf build && tsc",
       "test": "NODE_ENV=test mocha src/*test.ts --exit",
-      "eslint": "eslint src --fix --ext=ts"
+      "eslint": "eslint src --fix --ext=ts",
+      "local": "yarn build && yarn link"
     },
     "lint-staged": {
       "./src/**/*.ts": [
@@ -51,10 +52,13 @@ npm manifest:
       }
     },
     "dependencies": {
-      "@stoqey/aurum-broker-spec": "^0.0.1"
+      "@stoqey/aurum-broker-spec": "^0.0.2",
+      "@stoqey/ibkr": "^0.0.5",
+      "dotenv": "^8.2.0"
     },
     "devDependencies": {
       "@types/chai": "^4.2.11",
+      "@types/dotenv": "^8.2.0",
       "@types/lodash": "^4.14.149",
       "@types/mocha": "^7.0.2",
       "@types/node": "^12.0.8",
@@ -119,10 +123,19 @@ Lockfile:
     dependencies:
       any-observable "^0.3.0"
   
-  "@stoqey/aurum-broker-spec@^0.0.1":
-    version "0.0.1"
-    resolved "https://registry.yarnpkg.com/@stoqey/aurum-broker-spec/-/aurum-broker-spec-0.0.1.tgz#92957cf2358e182e0a45485ed040382d4e296f55"
-    integrity sha512-Vx930gwAdENtPxX9IC5rpvz4Z9QKLlrbs7quR9R6yb4/C9es5DQANAjHena9uh32PPN5kYny7D0zzWT5blLWZg==
+  "@stoqey/aurum-broker-spec@^0.0.2":
+    version "0.0.2"
+    resolved "https://registry.yarnpkg.com/@stoqey/aurum-broker-spec/-/aurum-broker-spec-0.0.2.tgz#11049a7ce9c999ff9d7fafd57aa58bc5bcdc14b2"
+    integrity sha512-605k64Gnr0n1iU3nkQJbjP9dNJ9TACyE+CMPzTvThLbUKvpdUJHF6P+bT/4d9SyDIODLs89rZjeyVXnTqZx4Rg==
+  
+  "@stoqey/ibkr@^0.0.5":
+    version "0.0.5"
+    resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-0.0.5.tgz#e563bb766c9c88b9d15f5ae1319048b3221f36b1"
+    integrity sha512-Wuh8VLW5ewEnUlOu9JMkEmW4Ws/ItkSbL1EuPRCqeeSJ6FezqEmMO0xKevFnvJltV5fP+mwyyy5i6pd6/m0A6g==
+    dependencies:
+      ib "^0.2.7"
+      lodash "^4.17.15"
+      moment "^2.24.0"
   
   "@types/chai@^4.2.11":
     version "4.2.11"
@@ -133,6 +146,13 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
     integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
+  
+  "@types/dotenv@^8.2.0":
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-8.2.0.tgz#5cd64710c3c98e82d9d15844375a33bf1b45d053"
+    integrity sha512-ylSC9GhfRH7m1EUXBXofhgx4lUWmFeQDINW5oLuS+gxWdfUeW4zJdeVTYVkexEW+e2VUvlZR2kGnGGipAWR7kw==
+    dependencies:
+      dotenv "*"
   
   "@types/eslint-visitor-keys@^1.0.0":
     version "1.0.0"
@@ -688,6 +708,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
     integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
   
+  command-buffer@^0.1.0:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/command-buffer/-/command-buffer-0.1.0.tgz#ced3f40f77289314db91cb77ef3b00c332e8e268"
+    integrity sha1-ztP0D3cokxTbkct37zsAwzLo4mg=
+  
   commander@^5.0.0:
     version "5.1.0"
     resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
@@ -899,6 +924,11 @@ Lockfile:
     integrity sha512-tUMXrxlExSW6U2EXiiKGSBVdYgtV8qlHL+C10TsW4PURY/ic+eaysnSkwB4kA/mBlCyy/IKDJ+Lc3wbWeaXtuQ==
     dependencies:
       is-obj "^1.0.0"
+  
+  dotenv@*, dotenv@^8.2.0:
+    version "8.2.0"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+    integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   
   duplexer3@^0.1.4:
     version "0.1.4"
@@ -1341,6 +1371,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
     integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
   
+  function-rate-limit@^1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/function-rate-limit/-/function-rate-limit-1.1.0.tgz#eccdf1af918fc959eb6509058603e462e37fd683"
+    integrity sha1-7M3xr5GPyVnrZQkFhgPkYuN/1oM=
+  
   functional-red-black-tree@^1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
@@ -1541,6 +1576,15 @@ Lockfile:
       please-upgrade-node "^3.2.0"
       slash "^3.0.0"
       which-pm-runs "^1.0.0"
+  
+  ib@^0.2.7:
+    version "0.2.7"
+    resolved "https://registry.yarnpkg.com/ib/-/ib-0.2.7.tgz#284c10a7f6b28858ed995e4c29640d25a885079f"
+    integrity sha512-aQdVNbBPZ1eWqLduHHdcAEMyRD7BvTZ9y9tHPCZf5rk17klEXb+0C9TXJoJLLbT5p+C0ebY/eVMfIQgmapKaLQ==
+    dependencies:
+      command-buffer "^0.1.0"
+      function-rate-limit "^1.1.0"
+      lodash "^4.17.10"
   
   iconv-lite@^0.4.24:
     version "0.4.24"
@@ -2011,7 +2055,7 @@ Lockfile:
     dependencies:
       p-locate "^4.1.0"
   
-  lodash@^4.17.14, lodash@^4.17.15:
+  lodash@^4.17.10, lodash@^4.17.14, lodash@^4.17.15:
     version "4.17.15"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
     integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -2170,6 +2214,11 @@ Lockfile:
       yargs "13.3.2"
       yargs-parser "13.1.2"
       yargs-unparser "1.6.0"
+  
+  moment@^2.24.0:
+    version "2.25.3"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.25.3.tgz#252ff41319cf41e47761a1a88cab30edfe9808c0"
+    integrity sha512-PuYv0PHxZvzc15Sp8ybUCoQ+xpyPWvjOuK72a5ovzp2LI32rJXOiIfyoFoYvG3s6EwwrdkMyWuRiEHSZRLJNdg==
   
   ms@2.0.0:
     version "2.0.0"

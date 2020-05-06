@@ -3,6 +3,12 @@ import { isTest } from "./config";
 import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates } from '@stoqey/ibkr';
 import { Broker, BrokerMethods, BrokerAccountSummary } from "@stoqey/aurum-broker-spec";
 
+interface GetMarketData {
+    symbol: string,
+    startDate: Date,
+    endDate?: Date,
+    symbolType?: string
+}
 export class IbkrBroker extends Broker implements BrokerMethods {
     // events = {} as any;
 
@@ -24,6 +30,9 @@ export class IbkrBroker extends Broker implements BrokerMethods {
             // TODO set ibkr env
             const startedApp = await ibkr();
             const onReady = self.events["onReady"];
+
+            // Init modules
+
             if (onReady && startedApp) {
                 onReady({});
 
@@ -61,6 +70,21 @@ export class IbkrBroker extends Broker implements BrokerMethods {
 
             if (onPriceUpdates) {
                 onPriceUpdates(data);
+            }
+
+        });
+
+
+        ibkrEvents.on(IBKREVENTS.ON_MARKET_DATA, (data) => {
+
+            const { symbol, marketData = [] } = data;
+
+            console.log(`Get marketdata ${symbol}`, marketData.length);
+
+            const onMarketData = self.events["onMarketData"];
+
+            if (onMarketData) {
+                onMarketData({ symbol, marketData });
             }
 
         });
@@ -105,7 +129,11 @@ export class IbkrBroker extends Broker implements BrokerMethods {
         return null;
     }
 
-    public async getMarketData(symbol: string, symbolType: string): Promise<any> {
+    // @ts-ignore
+    public async getMarketData(args: GetMarketData): Promise<any> {
+        const { symbol, startDate, endDate } = args;
+        AccountHistoryData.Instance.getHistoricalData(symbol);
+        // this.ibkrEvents.emit(IBKREVENTS.GET_MARKET_DATA, { symbol, startDate, endDate });
         // Can use finnhub
         return null;
     }
