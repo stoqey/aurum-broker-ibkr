@@ -19,7 +19,7 @@ describe('IBKR broker', () => {
             done();
         });
 
-        ibkrBroker.getPriceUpdate("TESTSYMBOL");
+        ibkrBroker.getPriceUpdate({ symbol: "TESTSYMBOL", startDate: null });
     })
 
     it(`MarketData`, (done) => {
