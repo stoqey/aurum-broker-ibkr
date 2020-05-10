@@ -26,22 +26,25 @@ export class IbkrBroker extends Broker {
             try {
                 const startedApp = await ibkr();
                 // Init modules
-                if (onReady && startedApp) {
-                    onReady(true);
+                if (onReady) {
 
-                    // If test
-                    if (isTest) {
-                        // fake trade
-                        setInterval(() => {
-                            const onOrders = self.events["onOrders"];
-                            onOrders && onOrders({ done: new Date });
-                        }, 1000)
+                    if (startedApp) {
+
+                        // If test
+                        if (isTest) {
+                            // fake trade
+                            setInterval(() => {
+                                const onOrders = self.events["onOrders"];
+                                onOrders && onOrders({ done: new Date });
+                            }, 1000)
+                        }
+                        return onReady(true);
                     }
-
-                    return;
-
+                    else {
+                        return onReady(false);
+                    }
                 }
-                onReady(false);
+
             }
             catch (error) {
                 console.log('error starting broker ibkr', error)
