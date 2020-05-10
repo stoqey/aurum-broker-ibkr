@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { isTest } from "./config";
-import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates, OrderTrade, OrderStock } from '@stoqey/ibkr';
+import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates, OrderTrade, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate } from '@stoqey/ibkr';
 import { Broker, BrokerAccountSummary, Portfolio, SymbolInfo, GetSymbolData } from "@stoqey/aurum-broker-spec";
 import OpenOrders from "@stoqey/ibkr/dist/orders/OpenOrders";
 
@@ -73,12 +73,47 @@ export class IbkrBroker extends Broker {
 
             const { symbol, marketData = [] } = data;
 
-            console.log(`Get marketdata ${symbol}`, marketData.length);
+            console.log(`IBKREVENTS.ON_MARKET_DATA ${symbol}`, marketData.length);
 
             const onMarketData = self.events["onMarketData"];
 
             if (onMarketData) {
                 onMarketData({ symbol, marketData });
+            }
+
+        });
+
+        ibkrEvents.on(IBKREVENTS.OPEN_ORDERS, (orders: OrderWithContract[]) => {
+
+            console.log(`IBKREVENTS.OPEN_ORDERS`, orders.length);
+
+            const onOrders = self.events["onOrders"];
+
+            if (onOrders) {
+                onOrders(orders);
+            }
+
+        });
+
+        ibkrEvents.on(IBKREVENTS.ORDER_FILLED, (data: { order: OrderWithContract, sale: CreateSale }) => {
+
+            const { order, sale } = data;
+            console.log(`IBKREVENTS.ORDER_FILLED`, order.symbol);
+
+            const onOrders = self.events["onOrders"];
+
+            if (onOrders) {
+                onOrders([order]);
+            }
+
+        });
+
+        ibkrEvents.on(IBKREVENTS.PORTFOLIOS, (portfolios: PortFolioUpdate[]) => {
+
+            const onPortfolios = self.events["onPortfolios"];
+
+            if (onPortfolios) {
+                onPortfolios(portfolios);
             }
 
         });
