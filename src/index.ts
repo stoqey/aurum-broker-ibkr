@@ -7,62 +7,19 @@ import OpenOrders from "@stoqey/ibkr/dist/orders/OpenOrders";
 export class IbkrBroker extends Broker {
 
     ibkrEvents: IbkrEvents;
+
     constructor(args?: any) {
         super();
-
         this.ibkrEvents = IbkrEvents.Instance;
-        // init all listeners
-        this.init();
-
-        // eslint-disable-next-line @typescript-eslint/no-this-alias
-        const self = this;
-
-        /**
-         * Start IBKR from here
-         */
-        (async () => {
-            // TODO set ibkr env
-            const onReady = self.events["onReady"];
-            try {
-                const startedApp = await ibkr();
-                // Init modules
-                if (onReady) {
-
-                    if (startedApp) {
-
-                        // If test
-                        if (isTest) {
-                            // fake trade
-                            setInterval(() => {
-                                const onOrders = self.events["onOrders"];
-                                onOrders && onOrders({ done: new Date });
-                            }, 1000)
-                        }
-                        return onReady(true);
-                    }
-                    else {
-                        return onReady(false);
-                    }
-                }
-
-            }
-            catch (error) {
-                console.log('error starting broker ibkr', error)
-                onReady && onReady(false);
-                process.exit(1);
-            }
-
-        })();
-
     }
 
     /**
     * init
     */
     public init() {
-
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         const self = this;
+
 
         const ibkrEvents = this.ibkrEvents;
 
@@ -129,6 +86,47 @@ export class IbkrBroker extends Broker {
             }
 
         });
+
+
+
+        /**
+         * Start IBKR from here
+         */
+        (async () => {
+            // TODO set ibkr env
+            const onReady = self.events["onReady"];
+
+            try {
+                const startedApp = await ibkr();
+                // Init modules
+                if (onReady) {
+
+                    if (startedApp) {
+
+                        // If test
+                        if (isTest) {
+                            // fake trade
+                            setInterval(() => {
+                                const onOrders = self.events["onOrders"];
+                                onOrders && onOrders({ done: new Date });
+                            }, 1000)
+                        }
+                        return onReady(true);
+                    }
+                    else {
+                        return onReady(false);
+                    }
+                }
+
+            }
+            catch (error) {
+                console.log('error starting broker ibkr', error)
+                onReady && onReady(false);
+                process.exit(1);
+            }
+
+        })();
+
     }
 
     public async getAccountSummary(): Promise<BrokerAccountSummary> {
