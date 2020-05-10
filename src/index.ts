@@ -46,6 +46,7 @@ export class IbkrBroker extends Broker {
             catch (error) {
                 console.log('error starting broker ibkr', error)
                 onReady && onReady(false);
+                process.exit(1);
             }
 
         })();
