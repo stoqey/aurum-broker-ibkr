@@ -1,17 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { isTest } from "./config";
 import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates } from '@stoqey/ibkr';
-import { Broker, BrokerMethods, BrokerAccountSummary } from "@stoqey/aurum-broker-spec";
+import { Broker, BrokerAccountSummary, Portfolio, SymbolInfo, GetSymbolData } from "@stoqey/aurum-broker-spec";
 
-interface GetMarketData {
-    symbol: string,
-    startDate: Date,
-    endDate?: Date,
-    symbolType?: string
-}
-export class IbkrBroker extends Broker implements BrokerMethods {
-    // events = {} as any;
-
+export class IbkrBroker extends Broker {
     ibkrEvents: IbkrEvents;
     constructor(args?: any) {
         super();
@@ -34,14 +26,14 @@ export class IbkrBroker extends Broker implements BrokerMethods {
             // Init modules
 
             if (onReady && startedApp) {
-                onReady({});
+                onReady(true);
 
                 // If test
                 if (isTest) {
                     // fake trade
                     setInterval(() => {
-                        const onTrade = self.events["onOrder"];
-                        onTrade && onTrade({ done: new Date });
+                        const onOrders = self.events["onOrders"];
+                        onOrders && onOrders({ done: new Date });
                     }, 1000)
                 }
 
@@ -51,8 +43,8 @@ export class IbkrBroker extends Broker implements BrokerMethods {
     }
 
     /**
-     * init
-     */
+ * init
+ */
     public init() {
 
         // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -90,6 +82,22 @@ export class IbkrBroker extends Broker implements BrokerMethods {
         });
     }
 
+    getAllPositions<T>(): Promise<Portfolio & T[]> {
+        throw new Error("Method not implemented.");
+    }
+    enterPosition<T>(portfolio: Portfolio & T): Promise<Portfolio & T> {
+        throw new Error("Method not implemented.");
+    }
+    exitPosition<T>(portfolio: Portfolio & T): Promise<Portfolio & T> {
+        throw new Error("Method not implemented.");
+    }
+    searchSymbol<T>(args: SymbolInfo & T): Promise<SymbolInfo & T[]> {
+        throw new Error("Method not implemented.");
+    }
+    quoteSymbol<T>(args: SymbolInfo & T): Promise<SymbolInfo & T> {
+        throw new Error("Method not implemented.");
+    }
+
     public async getAccountSummary(): Promise<BrokerAccountSummary> {
 
         const accountId = AccountSummary.Instance.accountSummary.AccountId;
@@ -103,34 +111,14 @@ export class IbkrBroker extends Broker implements BrokerMethods {
     getAllOrders: () => Promise<any>;
     getOpenOrders: () => Promise<any>;
 
-    public async getAllPositions(): Promise<any[]> {
-        const portfolioInstance = Portfolios.Instance;
-        const portfolios = await portfolioInstance.getPortfolios();
-        return portfolios;
-    }
+    // public async getAllPositions(): Promise<any[]> {
+    //     const portfolioInstance = Portfolios.Instance;
+    //     const portfolios = await portfolioInstance.getPortfolios();
+    //     return portfolios;
+    // }
 
-    public async enterPosition(portfolio: any[]): Promise<any> {
-        // use finnhub
-        return null;
-    }
 
-    public async exitPosition(portfolio: any[]): Promise<any> {
-        // use finnhub
-        return null;
-    }
-
-    public async searchSymbol(symbol: string, symbolType: string): Promise<any> {
-        // use finnhub
-        return null;
-
-    }
-    public async quoteSymbol(symbol: string, symbolType: string): Promise<any> {
-        // use finnhub
-        return null;
-    }
-
-    // @ts-ignore
-    public async getMarketData(args: GetMarketData): Promise<any> {
+    public async getMarketData(args: GetSymbolData): Promise<any> {
         const { symbol, startDate, endDate } = args;
         AccountHistoryData.Instance.getHistoricalData(symbol);
         // this.ibkrEvents.emit(IBKREVENTS.GET_MARKET_DATA, { symbol, startDate, endDate });
@@ -139,9 +127,10 @@ export class IbkrBroker extends Broker implements BrokerMethods {
     }
 
     // Complete
-    public async getPriceUpdate(symbol: string, symbolType?: string): Promise<any> {
+    public async getPriceUpdate(args: GetSymbolData): Promise<any> {
+        const { symbol, startDate, endDate } = args;
         this.ibkrEvents.emit(IBKREVENTS.SUBSCRIBE_PRICE_UPDATES, [symbol]);
-        return symbol;
+        return null;
     };
 
 }

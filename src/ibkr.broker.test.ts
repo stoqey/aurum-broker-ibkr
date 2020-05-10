@@ -19,7 +19,7 @@ describe('IBKR broker', () => {
             done();
         });
 
-        ibkrBroker.getPriceUpdate("AAPL");
+        ibkrBroker.getPriceUpdate("TESTSYMBOL");
     })
 
     it(`MarketData`, (done) => {
