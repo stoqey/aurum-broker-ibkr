@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { isTest } from "./config";
-import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates } from '@stoqey/ibkr';
+import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates, OrderTrade, OrderStock } from '@stoqey/ibkr';
 import { Broker, BrokerAccountSummary, Portfolio, SymbolInfo, GetSymbolData } from "@stoqey/aurum-broker-spec";
+import OpenOrders from "@stoqey/ibkr/dist/orders/OpenOrders";
 
 export class IbkrBroker extends Broker {
+
     ibkrEvents: IbkrEvents;
     constructor(args?: any) {
         super();
@@ -43,8 +45,8 @@ export class IbkrBroker extends Broker {
     }
 
     /**
- * init
- */
+    * init
+    */
     public init() {
 
         // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -82,22 +84,6 @@ export class IbkrBroker extends Broker {
         });
     }
 
-    getAllPositions<T>(): Promise<Portfolio & T[]> {
-        throw new Error("Method not implemented.");
-    }
-    enterPosition<T>(portfolio: Portfolio & T): Promise<Portfolio & T> {
-        throw new Error("Method not implemented.");
-    }
-    exitPosition<T>(portfolio: Portfolio & T): Promise<Portfolio & T> {
-        throw new Error("Method not implemented.");
-    }
-    searchSymbol<T>(args: SymbolInfo & T): Promise<SymbolInfo & T[]> {
-        throw new Error("Method not implemented.");
-    }
-    quoteSymbol<T>(args: SymbolInfo & T): Promise<SymbolInfo & T> {
-        throw new Error("Method not implemented.");
-    }
-
     public async getAccountSummary(): Promise<BrokerAccountSummary> {
 
         const accountId = AccountSummary.Instance.accountSummary.AccountId;
@@ -108,14 +94,33 @@ export class IbkrBroker extends Broker {
         }
     };
 
-    getAllOrders: () => Promise<any>;
-    getOpenOrders: () => Promise<any>;
+    async getOpenOrders(): Promise<any> {
+        const orders = OpenOrders.Instance;
+        return await orders.getOpenOrders();
+    }
 
-    // public async getAllPositions(): Promise<any[]> {
-    //     const portfolioInstance = Portfolios.Instance;
-    //     const portfolios = await portfolioInstance.getPortfolios();
-    //     return portfolios;
-    // }
+
+    async getAllPositions<T>(): Promise<any & T[]> {
+        const port = Portfolios.Instance;
+        return await port.getPortfolios();
+    }
+
+    async enterPosition<T>(portfolio: OrderStock & Portfolio & T): Promise<any & T> {
+        const trade = OrderTrade.Instance;
+        return await trade.placeOrder(portfolio);
+    }
+
+    async exitPosition<T>(portfolio: OrderStock & Portfolio & T): Promise<Portfolio & T> {
+        const trade = OrderTrade.Instance;
+        return await trade.placeOrder(portfolio);
+    }
+
+    searchSymbol<T>(args: SymbolInfo & T): Promise<SymbolInfo & T[]> {
+        throw new Error("Method not implemented.");
+    }
+    quoteSymbol<T>(args: SymbolInfo & T): Promise<SymbolInfo & T> {
+        throw new Error("Method not implemented.");
+    }
 
 
     public async getMarketData(args: GetSymbolData): Promise<any> {
