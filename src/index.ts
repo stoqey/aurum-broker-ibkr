@@ -178,6 +178,7 @@ export class IbkrBroker extends Broker {
     // Complete
     public async getPriceUpdate(args: GetSymbolData): Promise<any> {
         const { symbol, startDate, endDate } = args;
+        PriceUpdates.Instance;
         this.ibkrEvents.emit(IBKREVENTS.SUBSCRIBE_PRICE_UPDATES, { symbol });
         return null;
     };
