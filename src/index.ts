@@ -149,14 +149,14 @@ export class IbkrBroker extends Broker {
         return await port.getPortfolios();
     }
 
-    async enterPosition<T>(portfolio: OrderStock & T): Promise<any & T> {
+    async enterPosition<T>(order: OrderStock & T): Promise<any> {
         const trade = OrderTrade.Instance;
-        return await trade.placeOrder(portfolio);
+        return await trade.placeOrder(order);
     }
 
-    async exitPosition<T>(portfolio: OrderStock & T): Promise<Portfolio & T> {
+    async exitPosition<T>(order: OrderStock & T): Promise<any> {
         const trade = OrderTrade.Instance;
-        return await trade.placeOrder(portfolio);
+        return await trade.placeOrder(order);
     }
 
     searchSymbol<T>(args: SymbolInfo & T): Promise<SymbolInfo & T[]> {
