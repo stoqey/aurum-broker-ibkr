@@ -42,10 +42,10 @@
   resolved "https://registry.yarnpkg.com/@stoqey/aurum-broker-spec/-/aurum-broker-spec-0.0.7.tgz#b5fe4303731528884ff173af5edc6d8350a5170e"
   integrity sha512-d0ebVsklEXGGqFIEhl7HoqBl/JZ3CtCDIhJ+KrNpTgklX1Io9jVPmG9Z2pNaAb/BYexShSR2vc37BlyUGPbh5g==
 
-"@stoqey/ibkr@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-0.0.7.tgz#1fd1a54fda66b34367194f5ccb9e8709292eb471"
-  integrity sha512-ZAsxx8OGbhQBzRb7ondzbcKUvkkuFC3F1p1vtBUFQ3H23Xo7f4VMueb1SpUFVWtFERpOdgkjHFYHJIAu+CbQ4w==
+"@stoqey/ibkr@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-0.0.8.tgz#841ee3eae838ec8816b3584e4e2ea430d7dea4fb"
+  integrity sha512-lUTVmWww19tVoqBVveFuiVi6nWDzvrnQfHEOn/dg+wbrvBABRfCPOEE4467fPHpFOHpaYZbJXQrOROAe4QWo1g==
   dependencies:
     chalk "^4.0.0"
     dotenv "^8.2.0"

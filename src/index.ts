@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { isTest } from "./config";
-import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates, OrderTrade, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate } from '@stoqey/ibkr';
+import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates, OrderTrade, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate, OpenOrders } from '@stoqey/ibkr';
 import { Broker, BrokerAccountSummary, Portfolio, SymbolInfo, GetSymbolData } from "@stoqey/aurum-broker-spec";
-import OpenOrders from "@stoqey/ibkr/dist/orders/OpenOrders";
 
 export class IbkrBroker extends Broker {
 
