@@ -8,6 +8,7 @@ before((done) => {
         console.log('on IBKR ready');
         done();
     });
+    ibkrBroker.init();
 });
 
 describe('IBKR broker', () => {
