@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin/node /Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin/yarn add @stokey/ibkr
+  /Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin/node /Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin/yarn add /
 
 PATH: 
   /Users/ceddymuhoza/google-cloud-sdk/bin:/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/ceddymuhoza/google-cloud-sdk/bin:/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/bin
@@ -14,22 +14,12 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@stokey%2fibkr: Not found
-      at Request.params.callback [as _callback] (/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/lib/node_modules/yarn/lib/cli.js:66987:18)
-      at Request.self.callback (/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/lib/node_modules/yarn/lib/cli.js:140748:22)
-      at Request.emit (events.js:311:20)
-      at Request.<anonymous> (/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/lib/node_modules/yarn/lib/cli.js:141720:10)
-      at Request.emit (events.js:311:20)
-      at IncomingMessage.<anonymous> (/Users/ceddymuhoza/.nvm/versions/node/v12.16.1/lib/node_modules/yarn/lib/cli.js:141642:12)
-      at Object.onceWrapper (events.js:417:28)
-      at IncomingMessage.emit (events.js:323:22)
-      at endReadableNT (_stream_readable.js:1204:12)
-      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+  Error: EACCES: permission denied, scandir '/.fseventsd'
 
 npm manifest: 
   {
     "name": "@stoqey/aurum-broker-ibkr",
-    "version": "0.0.1",
+    "version": "0.0.6",
     "private": false,
     "main": "build/index.js",
     "types": "build/index.d.ts",
@@ -39,7 +29,9 @@ npm manifest:
       "build": "rm -rf build && tsc",
       "test": "NODE_ENV=test mocha src/*test.ts --exit",
       "eslint": "eslint src --fix --ext=ts",
-      "local": "yarn build && yarn link"
+      "local": "yarn build && yarn link",
+      "prepare": "npm run build",
+      "prepublishOnly": "npm test"
     },
     "lint-staged": {
       "./src/**/*.ts": [
@@ -52,8 +44,8 @@ npm manifest:
       }
     },
     "dependencies": {
-      "@stoqey/aurum-broker-spec": "^0.0.2",
-      "@stoqey/ibkr": "^0.0.5",
+      "@stoqey/aurum-broker-spec": "^0.0.7",
+      "@stoqey/ibkr": "^1.0.1",
       "dotenv": "^8.2.0"
     },
     "devDependencies": {
@@ -123,16 +115,18 @@ Lockfile:
     dependencies:
       any-observable "^0.3.0"
   
-  "@stoqey/aurum-broker-spec@^0.0.2":
-    version "0.0.2"
-    resolved "https://registry.yarnpkg.com/@stoqey/aurum-broker-spec/-/aurum-broker-spec-0.0.2.tgz#11049a7ce9c999ff9d7fafd57aa58bc5bcdc14b2"
-    integrity sha512-605k64Gnr0n1iU3nkQJbjP9dNJ9TACyE+CMPzTvThLbUKvpdUJHF6P+bT/4d9SyDIODLs89rZjeyVXnTqZx4Rg==
+  "@stoqey/aurum-broker-spec@^0.0.7":
+    version "0.0.7"
+    resolved "https://registry.yarnpkg.com/@stoqey/aurum-broker-spec/-/aurum-broker-spec-0.0.7.tgz#b5fe4303731528884ff173af5edc6d8350a5170e"
+    integrity sha512-d0ebVsklEXGGqFIEhl7HoqBl/JZ3CtCDIhJ+KrNpTgklX1Io9jVPmG9Z2pNaAb/BYexShSR2vc37BlyUGPbh5g==
   
-  "@stoqey/ibkr@^0.0.5":
-    version "0.0.5"
-    resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-0.0.5.tgz#e563bb766c9c88b9d15f5ae1319048b3221f36b1"
-    integrity sha512-Wuh8VLW5ewEnUlOu9JMkEmW4Ws/ItkSbL1EuPRCqeeSJ6FezqEmMO0xKevFnvJltV5fP+mwyyy5i6pd6/m0A6g==
+  "@stoqey/ibkr@^1.0.1":
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.0.1.tgz#88133c7948135dce7d02d578433c4e676e8684c8"
+    integrity sha512-HdUTkiiDGuPyM5cPYne6a3wS1Sy59nlOCdpOUfRMolcqlq/XIKCwAkcDx0E714zfH0gUSvq1pEDx3/5EtKN/cQ==
     dependencies:
+      chalk "^4.0.0"
+      dotenv "^8.2.0"
       ib "^0.2.7"
       lodash "^4.17.15"
       moment "^2.24.0"
