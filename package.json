@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@stoqey/aurum-broker-spec": "^0.0.7",
-    "@stoqey/ibkr": "^1.0.1",
+    "@stoqey/ibkr": "^1.0.2",
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
