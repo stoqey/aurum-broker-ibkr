@@ -3,10 +3,10 @@
     "target": "es5",
     "lib": [
       "es2015",
-      "dom"
+      "ES6"
     ],
     "rootDir": "src",
-    "outDir": "build",
+    "outDir": "dist",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
@@ -14,16 +14,15 @@
     "inlineSources": true,
     "esModuleInterop": true,
     "types": [
-      "node",
-      "mocha"
+      "node"
     ],
     "resolveJsonModule": true
   },
-  "exclude": [
-    "build",
-    "node_modules"
-  ],
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "types.d.ts",
+  ],
+  "exclude": [
+    "src/**/*test.ts",
   ]
 }
