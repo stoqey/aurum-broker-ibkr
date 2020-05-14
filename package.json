@@ -1,6 +1,6 @@
 {
   "name": "@stoqey/aurum-broker-ibkr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@stoqey/aurum-broker-spec": "^0.0.7",
-    "@stoqey/ibkr": "^1.0.3",
+    "@stoqey/ibkr": "^1.0.4",
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
