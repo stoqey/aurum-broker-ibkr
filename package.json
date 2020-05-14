@@ -2,8 +2,13 @@
   "name": "@stoqey/aurum-broker-ibkr",
   "version": "0.0.9",
   "private": false,
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "register/",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "nodemon src/index.ts",
     "start": "node build/index.js",
