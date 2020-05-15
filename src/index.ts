@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { isTest } from "./config";
-import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, AccountHistoryData, PriceUpdates, OrderTrade, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate, OpenOrders } from '@stoqey/ibkr';
+import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, HistoricalData, PriceUpdates, Orders, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate } from '@stoqey/ibkr';
 import { Broker, BrokerAccountSummary, Portfolio, SymbolInfo, GetSymbolData } from "@stoqey/aurum-broker-spec";
 
 export class IbkrBroker extends Broker {
@@ -139,7 +139,7 @@ export class IbkrBroker extends Broker {
     };
 
     async getOpenOrders(): Promise<any> {
-        const orders = OpenOrders.Instance;
+        const orders = Orders.Instance;
         return await orders.getOpenOrders();
     }
 
@@ -150,12 +150,12 @@ export class IbkrBroker extends Broker {
     }
 
     async enterPosition<T>(order: OrderStock & T): Promise<any> {
-        const trade = OrderTrade.Instance;
+        const trade = Orders.Instance;
         return await trade.placeOrder(order);
     }
 
     async exitPosition<T>(order: OrderStock & T): Promise<any> {
-        const trade = OrderTrade.Instance;
+        const trade = Orders.Instance;
         return await trade.placeOrder(order);
     }
 
@@ -169,7 +169,7 @@ export class IbkrBroker extends Broker {
 
     public async getMarketData(args: GetSymbolData): Promise<any> {
         const { symbol, startDate, endDate } = args;
-        AccountHistoryData.Instance.getHistoricalData(symbol);
+        HistoricalData.Instance.getHistoricalData({ symbol });
         // this.ibkrEvents.emit(IBKREVENTS.GET_MARKET_DATA, { symbol, startDate, endDate });
         // Can use finnhub
         return null;

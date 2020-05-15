@@ -31,4 +31,5 @@ module.exports = {
     "import/namespace": "off"
   },
   settings: {},
+
 };
