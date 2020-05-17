@@ -42,14 +42,26 @@
   resolved "https://registry.yarnpkg.com/@stoqey/aurum-broker-spec/-/aurum-broker-spec-0.0.7.tgz#b5fe4303731528884ff173af5edc6d8350a5170e"
   integrity sha512-d0ebVsklEXGGqFIEhl7HoqBl/JZ3CtCDIhJ+KrNpTgklX1Io9jVPmG9Z2pNaAb/BYexShSR2vc37BlyUGPbh5g==
 
-"@stoqey/ibkr@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.0.7.tgz#09a6d6baa3016ee556521243552408584db519ff"
-  integrity sha512-nFHV3pZaHv2F/YOQjUwCcG4n+7bJDuZJ6Ff1U58vjEtt4QwXFEEes4wB2I81arBsS/anm4t/hh2CPiMlBIxVCw==
+"@stoqey/ib@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@stoqey/ib/-/ib-0.0.2.tgz#3b1b904b68a0e875dd462ed755a6d2e3db5fed1a"
+  integrity sha512-s6zhAoRhShzfkWMA3JY4ieSaoCyBaTXovTKiEJx2VTt0AiXnLagmOq++RUuYrFyTq4CkdcduSpb/k4xitSAhWg==
   dependencies:
     chalk "^4.0.0"
+    command-buffer "^0.1.0"
     dotenv "^8.2.0"
-    ib "^0.2.7"
+    function-rate-limit "^1.1.0"
+    lodash "^4.17.15"
+    moment "^2.24.0"
+
+"@stoqey/ibkr@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.0.9.tgz#d7faf7f80ab1cc59e775ba6f74ec9797fcf5824d"
+  integrity sha512-nuLpzTtWVotSzOuwQ4n0RjQNg2GENBvUhT1AYQwF/hdq93vks++3YLSXdztB0FvHlcEEZ25+p386st3mrSQyZQ==
+  dependencies:
+    "@stoqey/ib" "^0.0.2"
+    debug "^4.1.1"
+    dotenv "^8.2.0"
     lodash "^4.17.15"
     moment "^2.24.0"
 
@@ -1493,15 +1505,6 @@ husky@^4.2.5:
     slash "^3.0.0"
     which-pm-runs "^1.0.0"
 
-ib@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/ib/-/ib-0.2.7.tgz#284c10a7f6b28858ed995e4c29640d25a885079f"
-  integrity sha512-aQdVNbBPZ1eWqLduHHdcAEMyRD7BvTZ9y9tHPCZf5rk17klEXb+0C9TXJoJLLbT5p+C0ebY/eVMfIQgmapKaLQ==
-  dependencies:
-    command-buffer "^0.1.0"
-    function-rate-limit "^1.1.0"
-    lodash "^4.17.10"
-
 iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -1971,7 +1974,7 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
-lodash@^4.17.10, lodash@^4.17.14, lodash@^4.17.15:
+lodash@^4.17.14, lodash@^4.17.15:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
