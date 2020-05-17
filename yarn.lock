@@ -54,10 +54,10 @@
     lodash "^4.17.15"
     moment "^2.24.0"
 
-"@stoqey/ibkr@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.0.9.tgz#d7faf7f80ab1cc59e775ba6f74ec9797fcf5824d"
-  integrity sha512-nuLpzTtWVotSzOuwQ4n0RjQNg2GENBvUhT1AYQwF/hdq93vks++3YLSXdztB0FvHlcEEZ25+p386st3mrSQyZQ==
+"@stoqey/ibkr@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.1.1.tgz#17ff0fd2934f9fbfd2349b100b50e7063f0c184f"
+  integrity sha512-kie+Z1dpmAn1hKS78ZK52aSWqDGKnmng2EKB3c1hi/cWH42S9+jhbm/mh4OsWRrNZ7SIYz+RWUerGhmY/ISP3w==
   dependencies:
     "@stoqey/ib" "^0.0.2"
     debug "^4.1.1"
