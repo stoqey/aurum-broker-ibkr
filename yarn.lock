@@ -54,16 +54,22 @@
     lodash "^4.17.15"
     moment "^2.24.0"
 
-"@stoqey/ibkr@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.1.1.tgz#17ff0fd2934f9fbfd2349b100b50e7063f0c184f"
-  integrity sha512-kie+Z1dpmAn1hKS78ZK52aSWqDGKnmng2EKB3c1hi/cWH42S9+jhbm/mh4OsWRrNZ7SIYz+RWUerGhmY/ISP3w==
+"@stoqey/ibkr@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.1.2.tgz#90cce4e975b4767719c894aeb3e561cea5c25cad"
+  integrity sha512-unqUv+0vzz7Vn0v8CYmWHCxwQ9U50tGyufvSVHUq6rv+NwbNTzY3Ma/ajD4I6wBN45KGNdPpTj6WJ7JycySFeA==
   dependencies:
     "@stoqey/ib" "^0.0.2"
+    "@stoqey/timeout-manager" "^0.0.2"
     debug "^4.1.1"
     dotenv "^8.2.0"
     lodash "^4.17.15"
     moment "^2.24.0"
+
+"@stoqey/timeout-manager@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@stoqey/timeout-manager/-/timeout-manager-0.0.2.tgz#af39dc509a7cdb6d6edf4be920adb0c2d760a7a1"
+  integrity sha512-/uRZ9osIf+yNq2nq/OcpH6A/h9Lva8HZ5KcDPiXhjAkwX+uQcRHq3GBQG/BHRPekdjvWzfpPnOVEdAJ+XiYALQ==
 
 "@types/chai@^4.2.11":
   version "4.2.11"
