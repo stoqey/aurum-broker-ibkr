@@ -54,10 +54,10 @@
     lodash "^4.17.15"
     moment "^2.24.0"
 
-"@stoqey/ibkr@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.1.4.tgz#515127428050fe2255b78a9d1561dff2506b91ff"
-  integrity sha512-eOcTxuwp8hUdpLEaZTk7zKsn2GO8mmwDCk4Cr7zpcqY3HHRP7RHoQJC/RSiDZu5bt7ae49NHCy0oQbnVAvWFfw==
+"@stoqey/ibkr@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@stoqey/ibkr/-/ibkr-1.1.6.tgz#3ee91255115842a4e04772e2c0fec29d22e4ae01"
+  integrity sha512-5ral8w6VjcrpZAlRdRZI+cY9F5rvbcG3GUWebn3OmiKndgQ3p1fiZKA7RX3Gap7aRhzSRupNorVcru/psgXdow==
   dependencies:
     "@stoqey/ib" "^0.0.2"
     "@stoqey/timeout-manager" "^0.0.2"
