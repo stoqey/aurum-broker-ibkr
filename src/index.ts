@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { isTest } from "./config";
-import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, HistoricalData, PriceUpdates, Orders, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate, MosaicScanner, MosaicScannerData } from '@stoqey/ibkr';
+import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, HistoricalData, PriceUpdates, Orders, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate, MosaicScanner, MosaicScannerData, ReqHistoricalData } from '@stoqey/ibkr';
 import { Broker, BrokerAccountSummary, Portfolio, SymbolInfo, GetSymbolData } from "@stoqey/aurum-broker-spec";
 
 type ScreenerMethod = (args: any) => Promise<MosaicScannerData[]>;
+
+interface GetHistoricalData extends GetSymbolData {
+    options?: ReqHistoricalData
+}
 export class IbkrBroker extends Broker {
 
     ibkrEvents: IbkrEvents;
@@ -168,9 +172,9 @@ export class IbkrBroker extends Broker {
     }
 
 
-    public async getMarketData(args: GetSymbolData): Promise<any> {
-        const { symbol, startDate, endDate } = args;
-        HistoricalData.Instance.getHistoricalData({ symbol });
+    public async getMarketData(args: GetHistoricalData): Promise<any> {
+        const { symbol, startDate, endDate, options } = args;
+        HistoricalData.Instance.getHistoricalData({ symbol, ...options });
         // this.ibkrEvents.emit(IBKREVENTS.GET_MARKET_DATA, { symbol, startDate, endDate });
         // Can use finnhub
         return null;
@@ -185,7 +189,7 @@ export class IbkrBroker extends Broker {
     };
 
     /**
-     * getScreener
+     * GetScreener method
      */
     public getScreener(): ScreenerMethod {
         return new MosaicScanner().scanMarket;
