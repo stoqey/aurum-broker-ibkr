@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { isTest } from "./config";
-import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, HistoricalData, PriceUpdates, Orders, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate } from '@stoqey/ibkr';
+import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, HistoricalData, PriceUpdates, Orders, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate, MosaicScanner, MosaicScannerData } from '@stoqey/ibkr';
 import { Broker, BrokerAccountSummary, Portfolio, SymbolInfo, GetSymbolData } from "@stoqey/aurum-broker-spec";
 
+type ScreenerMethod = (args: any) => Promise<MosaicScannerData[]>;
 export class IbkrBroker extends Broker {
 
     ibkrEvents: IbkrEvents;
@@ -182,6 +183,13 @@ export class IbkrBroker extends Broker {
         this.ibkrEvents.emit(IBKREVENTS.SUBSCRIBE_PRICE_UPDATES, { symbol });
         return null;
     };
+
+    /**
+     * getScreener
+     */
+    public getScreener(): ScreenerMethod {
+        return new MosaicScanner().scanMarket;
+    }
 
 }
 
