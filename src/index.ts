@@ -2,6 +2,7 @@
 import { isTest } from "./config";
 import ibkr, { AccountSummary, Portfolios, IbkrEvents, IBKREVENTS, HistoryData, HistoricalData, PriceUpdates, Orders, OrderStock, OrderWithContract, CreateSale, PortFolioUpdate, MosaicScanner, MosaicScannerData, ReqHistoricalData } from '@stoqey/ibkr';
 import { Broker, BrokerAccountSummary, Portfolio, SymbolInfo, GetSymbolData } from "@stoqey/aurum-broker-spec";
+import { log } from './log';
 
 type ScreenerMethod = (args: any) => Promise<MosaicScannerData[]>;
 
@@ -46,7 +47,7 @@ export class IbkrBroker extends Broker {
 
             const { symbol, marketData = [] } = data;
 
-            console.log(`IBKREVENTS.ON_MARKET_DATA ${symbol}`, marketData.length);
+            log(`IBKREVENTS.ON_MARKET_DATA ${symbol}`, marketData.length);
 
             const onMarketData = self.events["onMarketData"];
 
@@ -58,7 +59,7 @@ export class IbkrBroker extends Broker {
 
         ibkrEvents.on(IBKREVENTS.OPEN_ORDERS, (orders: OrderWithContract[]) => {
 
-            console.log(`IBKREVENTS.OPEN_ORDERS`, orders.length);
+            log(`IBKREVENTS.OPEN_ORDERS`, orders.length);
 
             const onOrders = self.events["onOrders"];
 
@@ -71,7 +72,7 @@ export class IbkrBroker extends Broker {
         ibkrEvents.on(IBKREVENTS.ORDER_FILLED, (data: { order: OrderWithContract, sale: CreateSale }) => {
 
             const { order, sale } = data;
-            console.log(`IBKREVENTS.ORDER_FILLED`, order.symbol);
+            log(`IBKREVENTS.ORDER_FILLED`, order.symbol);
 
             const onOrders = self.events["onOrders"];
 
@@ -124,7 +125,7 @@ export class IbkrBroker extends Broker {
 
             }
             catch (error) {
-                console.log('error starting broker ibkr', error)
+                log('error starting broker ibkr', error)
                 onReady && onReady(false);
                 process.exit(1);
             }

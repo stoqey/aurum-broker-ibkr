@@ -32,6 +32,7 @@
   "dependencies": {
     "@stoqey/aurum-broker-spec": "^0.0.7",
     "@stoqey/ibkr": "^1.1.8",
+    "@stoqey/mille": "^0.0.4",
     "dotenv": "^8.2.0"
   },
   "devDependencies": {
