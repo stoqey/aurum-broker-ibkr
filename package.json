@@ -15,8 +15,7 @@
     "build": "rm -rf build && tsc",
     "test": "NODE_ENV=test mocha src/*test.ts --exit",
     "eslint": "eslint src --fix --ext=ts",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm run build"
   },
   "lint-staged": {
     "./src/**/*.ts": [
@@ -30,7 +29,7 @@
   },
   "dependencies": {
     "@stoqey/aurum-broker-spec": "^0.0.7",
-    "@stoqey/ibkr": "^1.1.8",
+    "@stoqey/ibkr": "^1.5.1",
     "@stoqey/mille": "^0.0.4",
     "dotenv": "^8.2.0"
   },
