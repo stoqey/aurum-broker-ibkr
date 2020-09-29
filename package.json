@@ -15,7 +15,6 @@
     "build": "rm -rf build && tsc",
     "test": "NODE_ENV=test mocha src/*test.ts --exit",
     "eslint": "eslint src --fix --ext=ts",
-    "local": "yarn build && yarn link",
     "prepare": "npm run build",
     "prepublishOnly": "npm test"
   },
