@@ -51,6 +51,10 @@ export class IbkrBroker extends Broker {
   constructor(args?: Args) {
     super();
     this.ibkrEvents = IbkrEvents.Instance;
+
+    if (args) {
+      this.args = args;
+    }
   }
 
   /**
