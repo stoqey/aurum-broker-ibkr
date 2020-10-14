@@ -31,10 +31,24 @@ type ScreenerMethod = (args: any) => Promise<MosaicScannerData[]>;
 interface GetHistoricalData extends GetSymbolData {
   options?: ReqHistoricalData;
 }
+
+interface Args {
+  host: string;
+  port: number;
+}
+
 export class IbkrBroker extends Broker {
   ibkrEvents: IbkrEvents;
 
-  constructor(args?: any) {
+  /**
+   * Default arguments
+   */
+  args: Args = {
+    host: process.env.IBKR_HOST,
+    port: +process.env.IBKR_PORT,
+  };
+
+  constructor(args?: Args) {
     super();
     this.ibkrEvents = IbkrEvents.Instance;
   }
@@ -54,8 +68,10 @@ export class IbkrBroker extends Broker {
     ibkrEvents.on(IBKREVENTS.ON_PRICE_UPDATES, (data) => {
       const onPriceUpdates = self.events["onPriceUpdate"];
 
-      if (onPriceUpdates) {
-        onPriceUpdates(data);
+      if (data && data.price) {
+        if (onPriceUpdates) {
+          onPriceUpdates(data);
+        }
       }
     });
 
@@ -111,7 +127,7 @@ export class IbkrBroker extends Broker {
       const onReady = self.events["onReady"];
 
       try {
-        const startedApp = await ibkr();
+        const startedApp = await ibkr(self.args);
         // Init modules
         if (onReady) {
           if (startedApp) {
@@ -192,7 +208,7 @@ export class IbkrBroker extends Broker {
       opt: { tickerType: action === "BUY" ? "BID" : "ASK", startDate, endDate },
     };
     this.ibkrEvents.emit(IBKREVENTS.SUBSCRIBE_PRICE_UPDATES, dataToSend);
-    return dataToSend;
+    // return dataToSend;
   }
 
   /**
